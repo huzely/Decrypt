@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-body text-center p-5">
+    <h3 class="mb-3">Đang chuyển hướng...</h3>
+    <p class="text-muted mb-4">Hệ thống sẽ mở Shopee và sau 5s sẽ tự động nhảy sang Telegram.</p>
+    {% if link.body_content %}
+    <div class="alert alert-info text-start">{{ link.body_content }}</div>
+    {% endif %}
+    <div class="spinner-border text-primary mb-3" role="status"></div>
+    <p class="small">Nếu không được chuyển, <a href="{{ link.telegram_url }}">nhấn vào đây</a>.</p>
+  </div>
+</div>
+<script>
+  (function() {
+    const shopee = {{ link.shopee_url|tojson }};
+    const telegram = {{ link.telegram_url|tojson }};
+    window.location.replace(shopee);
+    setTimeout(() => {
+      window.location.href = telegram;
+    }, 5000);
+  })();
+</script>
+{% endblock %}
