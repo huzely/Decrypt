@@ -1,0 +1,28 @@
+body {
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--main), #111827);
+  color: #fff;
+  border-radius: 14px;
+  padding: 2.5rem;
+  box-shadow: 0 15px 35px rgba(0,0,0,.12);
+}
+
+.link-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1rem;
+  transition: transform .15s ease, box-shadow .15s ease;
+  background: #fff;
+}
+
+.link-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,.08);
+}
+
+.badge-accent {
+  background-color: var(--accent);
+}
