@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3 class="mb-0">Tùy chỉnh giao diện</h3>
+  <a class="btn btn-outline-secondary" href="{{ url_for('admin_dashboard') }}">Quay lại</a>
+</div>
+<form method="post" class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label">Tiêu đề chính</label>
+    <input class="form-control" name="hero_title" value="{{ settings.hero_title }}">
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Phụ đề</label>
+    <input class="form-control" name="hero_subtitle" value="{{ settings.hero_subtitle }}">
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Màu nền chính</label>
+    <input class="form-control" type="color" name="main_color" value="{{ settings.main_color }}">
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Màu nhấn</label>
+    <input class="form-control" type="color" name="accent_color" value="{{ settings.accent_color }}">
+  </div>
+  <div class="col-12">
+    <button class="btn btn-success" type="submit">Lưu thay đổi</button>
+  </div>
+</form>
+{% endblock %}
