@@ -1,0 +1,12 @@
+RewriteEngine On
+# Bỏ qua các thư mục cố định
+RewriteCond %{REQUEST_URI} ^/(admin|static|uploads)/ [NC]
+RewriteRule .* - [L]
+
+# Nếu file/thư mục tồn tại thì phục vụ bình thường
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule .* - [L]
+
+# Pretty link: domain/slug -> link.php?slug=slug
+RewriteRule ^([^/]+)/?$ link.php?slug=$1 [L,QSA]
