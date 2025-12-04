@@ -1,0 +1,15 @@
+<%- include('../partials/header') %>
+<section class="card">
+  <h1>Đăng nhập</h1>
+  <% if (typeof error !== 'undefined') { %><div class="alert"><%= error %></div><% } %>
+  <form method="post" action="/login">
+    <label>Email</label>
+    <input name="email" type="email" required />
+    <label>Mật khẩu</label>
+    <input name="password" type="password" required />
+    <button type="submit">Login</button>
+  </form>
+  <a href="/forgot">Quên mật khẩu?</a>
+  <div>Chưa có tài khoản? <a href="/register">Đăng ký</a></div>
+</section>
+<%- include('../partials/footer') %>

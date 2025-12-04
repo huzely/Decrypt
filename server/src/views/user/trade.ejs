@@ -1,0 +1,32 @@
+<%- include('../partials/header') %>
+<section class="trade-layout">
+  <div class="card chart">
+    <h2>Biểu đồ (giá realtime)</h2>
+    <div id="priceBoard"></div>
+  </div>
+  <div class="card order-panel">
+    <h2>Đặt lệnh</h2>
+    <% if (typeof error !== 'undefined') { %><div class="alert"><%= error %></div><% } %>
+    <form method="post" action="/trade">
+      <label>Tài sản</label>
+      <select name="assetId" id="assetSelect">
+        <% assets.forEach(a => { %>
+          <option value="<%= a.id %>" data-symbol="<%= a.symbol %>"><%= a.name %> (<%= a.symbol %>)</option>
+        <% }) %>
+      </select>
+      <label>Số tiền</label>
+      <input type="number" name="stake" min="1" step="0.01" required />
+      <label>Thời gian hết hạn</label>
+      <select name="expiry">
+        <option value="30">30 giây</option>
+        <option value="60">60 giây</option>
+        <option value="120">120 giây</option>
+      </select>
+      <div class="actions">
+        <button type="submit" name="direction" value="UP" class="btn-up">TĂNG</button>
+        <button type="submit" name="direction" value="DOWN" class="btn-down">GIẢM</button>
+      </div>
+    </form>
+  </div>
+</section>
+<%- include('../partials/footer') %>

@@ -1,0 +1,26 @@
+<%- include('../partials/adminHeader') %>
+<section class="card">
+  <h2>Yêu cầu Nạp</h2>
+  <table>
+    <thead><tr><th>User</th><th>Số tiền</th><th>Trạng thái</th><th>Action</th></tr></thead>
+    <tbody>
+      <% txs.forEach(tx => { %>
+        <tr>
+          <td><%= tx.user.email %></td>
+          <td><%= tx.amount %></td>
+          <td><%= tx.status %></td>
+          <td>
+            <% if (tx.status === 'PENDING') { %>
+            <form method="post" action="/admin/transactions/<%= tx.id %>">
+              <input name="note" placeholder="Ghi chú" />
+              <button name="action" value="approve" type="submit">Duyệt</button>
+              <button name="action" value="reject" type="submit">Từ chối</button>
+            </form>
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<%- include('../partials/adminFooter') %>

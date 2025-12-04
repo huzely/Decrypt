@@ -1,0 +1,26 @@
+<%- include('../partials/adminHeader') %>
+<section class="card">
+  <h2>Tài sản</h2>
+  <form method="post" action="/admin/assets">
+    <input name="id" type="hidden" />
+    <input name="name" placeholder="Tên" required />
+    <input name="symbol" placeholder="Mã" required />
+    <input name="manualPayout" type="number" placeholder="Payout %" required />
+    <input name="minStake" type="number" placeholder="Min" required />
+    <input name="maxStake" type="number" placeholder="Max" required />
+    <label><input type="checkbox" name="active" checked /> Active</label>
+    <button type="submit">Thêm tài sản</button>
+  </form>
+  <table>
+    <thead><tr><th>Symbol</th><th>Payout</th><th>Trạng thái</th><th>Hành động</th></tr></thead>
+    <tbody>
+      <% assets.forEach(a => { %>
+        <tr>
+          <td><%= a.symbol %></td><td><%= a.manualPayout %>%</td><td><%= a.active ? 'ON' : 'OFF' %></td>
+          <td><a href="/admin/assets/<%= a.id %>/payout">Payout</a></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<%- include('../partials/adminFooter') %>

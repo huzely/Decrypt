@@ -1,0 +1,26 @@
+<%- include('../partials/header') %>
+<section class="grid">
+  <div class="card">
+    <h2>Số dư: <%= wallet?.balance || 0 %> CREDIT</h2>
+    <% if (typeof error !== 'undefined') { %><div class="alert"><%= error %></div><% } %>
+    <form method="post" action="/wallet/deposit">
+      <h3>Nạp CREDIT</h3>
+      <input name="amount" type="number" min="1" step="0.01" required />
+      <button type="submit">Tạo yêu cầu nạp</button>
+    </form>
+    <form method="post" action="/wallet/withdraw">
+      <h3>Rút CREDIT</h3>
+      <input name="amount" type="number" min="1" step="0.01" required />
+      <button type="submit">Tạo yêu cầu rút</button>
+    </form>
+  </div>
+  <div class="card">
+    <h2>Lịch sử ví</h2>
+    <ul>
+      <% transactions.forEach(t => { %>
+        <li><%= t.type %> - <%= t.amount %> - <%= t.status %> - <%= t.createdAt.toISOString() %></li>
+      <% }) %>
+    </ul>
+  </div>
+</section>
+<%- include('../partials/footer') %>

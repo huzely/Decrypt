@@ -1,0 +1,23 @@
+<%- include('../partials/adminHeader') %>
+<section class="card">
+  <h2>Payout cho <%= asset?.name %></h2>
+  <form method="post" action="/admin/assets/<%= asset?.id %>/payout">
+    <label>Mode</label>
+    <select name="mode">
+      <option value="MANUAL" <%= asset.payoutMode === 'MANUAL' ? 'selected' : '' %>>Manual</option>
+      <option value="AUTO" <%= asset.payoutMode === 'AUTO' ? 'selected' : '' %>>Auto</option>
+    </select>
+    <label>Manual payout %</label>
+    <input name="manualPayout" type="number" value="<%= asset.manualPayout %>" />
+    <label>Base payout</label>
+    <input name="basePayout" type="number" value="<%= asset.basePayout %>" />
+    <label>Min payout</label>
+    <input name="minPayout" type="number" value="<%= asset.minPayout %>" />
+    <label>Max payout</label>
+    <input name="maxPayout" type="number" value="<%= asset.maxPayout %>" />
+    <label>Volume threshold</label>
+    <input name="volumeThreshold" type="number" value="<%= asset.volumeThreshold %>" />
+    <button type="submit">Lưu</button>
+  </form>
+</section>
+<%- include('../partials/adminFooter') %>

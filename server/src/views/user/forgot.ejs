@@ -1,0 +1,12 @@
+<%- include('../partials/header') %>
+<section class="card">
+  <h1>Quên mật khẩu</h1>
+  <% if (typeof error !== 'undefined') { %><div class="alert"><%= error %></div><% } %>
+  <% if (typeof message !== 'undefined') { %><div class="alert success"><%= message %></div><% } %>
+  <form method="post" action="/forgot">
+    <label>Email</label>
+    <input name="email" type="email" required />
+    <button type="submit">Gửi token reset</button>
+  </form>
+</section>
+<%- include('../partials/footer') %>

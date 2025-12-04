@@ -1,0 +1,12 @@
+<%- include('../partials/header') %>
+<section class="card">
+  <h1>Reset mật khẩu</h1>
+  <% if (typeof error !== 'undefined') { %><div class="alert"><%= error %></div><% } %>
+  <form method="post" action="/reset">
+    <input type="hidden" name="token" value="<%= token %>" />
+    <label>Mật khẩu mới</label>
+    <input name="password" type="password" required />
+    <button type="submit">Reset</button>
+  </form>
+</section>
+<%- include('../partials/footer') %>

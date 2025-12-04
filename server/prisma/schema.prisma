@@ -1,0 +1,129 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  BANNED
+}
+
+enum TransactionType {
+  DEPOSIT
+  WITHDRAW
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  REJECTED
+}
+
+enum OrderStatus {
+  OPEN
+  WIN
+  LOSE
+  DRAW
+  CANCELLED
+}
+
+enum PayoutMode {
+  MANUAL
+  AUTO
+}
+
+enum Direction {
+  UP
+  DOWN
+}
+
+model User {
+  id           Int             @id @default(autoincrement())
+  email        String          @unique
+  username     String          @unique
+  password     String
+  role         Role            @default(USER)
+  status       UserStatus      @default(ACTIVE)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  wallet       Wallet?
+  orders       Order[]
+  transactions Transaction[]
+  resetTokens  PasswordResetToken[]
+}
+
+model Wallet {
+  id        Int      @id @default(autoincrement())
+  balance   Decimal  @default(0)
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int      @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Transaction {
+  id          Int                @id @default(autoincrement())
+  type        TransactionType
+  amount      Decimal
+  status      TransactionStatus  @default(PENDING)
+  user        User               @relation(fields: [userId], references: [id])
+  userId      Int
+  handledBy   Int?
+  note        String?
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+}
+
+model Asset {
+  id             Int        @id @default(autoincrement())
+  name           String
+  symbol         String     @unique
+  active         Boolean    @default(true)
+  payoutMode     PayoutMode @default(MANUAL)
+  manualPayout   Int        @default(85)
+  minStake       Decimal    @default(1)
+  maxStake       Decimal    @default(1000)
+  basePayout     Int        @default(85)
+  minPayout      Int        @default(70)
+  maxPayout      Int        @default(95)
+  volumeThreshold Decimal   @default(10000)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  orders         Order[]
+}
+
+model Order {
+  id          Int        @id @default(autoincrement())
+  user        User       @relation(fields: [userId], references: [id])
+  userId      Int
+  asset       Asset      @relation(fields: [assetId], references: [id])
+  assetId     Int
+  direction   Direction
+  stake       Decimal
+  payout      Int
+  entryPrice  Decimal
+  settlePrice Decimal?
+  status      OrderStatus @default(OPEN)
+  expireAt    DateTime
+  createdAt   DateTime    @default(now())
+  profit      Decimal?    @default(0)
+}
+
+model PasswordResetToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
