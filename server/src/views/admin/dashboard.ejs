@@ -1,0 +1,7 @@
+<%- include('../partials/adminHeader') %>
+<section class="grid">
+  <div class="card"><h3>Người dùng</h3><p><%= userCount %></p></div>
+  <div class="card"><h3>Nạp/Rút</h3><ul><% txSummary.forEach(t=> { %><li><%= t.type %>: <%= t._sum.amount || 0 %></li><% }) %></ul></div>
+  <div class="card"><h3>Lệnh</h3><ul><% orderSummary.forEach(o=> { %><li><%= o.status %>: <%= o._count._all %></li><% }) %></ul></div>
+</section>
+<%- include('../partials/adminFooter') %>

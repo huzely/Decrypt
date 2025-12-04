@@ -1,0 +1,27 @@
+<%- include('../partials/adminHeader') %>
+<section class="card">
+  <h2>Người dùng</h2>
+  <form method="get">
+    <input name="q" value="<%= q %>" placeholder="Tìm kiếm" />
+    <button type="submit">Tìm</button>
+  </form>
+  <table>
+    <thead><tr><th>Username</th><th>Email</th><th>Số dư</th><th>Trạng thái</th><th>Action</th></tr></thead>
+    <tbody>
+      <% users.forEach(u => { %>
+        <tr>
+          <td><%= u.username %></td>
+          <td><%= u.email %></td>
+          <td><%= u.wallet?.balance || 0 %></td>
+          <td><%= u.status %></td>
+          <td>
+            <form method="post" action="/admin/users/<%= u.id %>/toggle">
+              <button type="submit"><%= u.status === 'ACTIVE' ? 'Khóa' : 'Mở' %></button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<%- include('../partials/adminFooter') %>

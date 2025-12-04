@@ -1,0 +1,16 @@
+<%- include('../partials/header') %>
+<section class="grid">
+  <div class="card">
+    <h2>Số dư</h2>
+    <div class="balance"><%= wallet?.balance || 0 %> CREDIT</div>
+  </div>
+  <div class="card">
+    <h2>Lệnh đang chạy</h2>
+    <ul>
+      <% orders.forEach(o => { %>
+        <li><strong><%= o.asset.symbol %></strong> <%= o.direction %> - <%= o.stake %> - hết hạn <%= o.expireAt.toISOString() %></li>
+      <% }) %>
+    </ul>
+  </div>
+</section>
+<%- include('../partials/footer') %>

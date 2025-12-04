@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+<section class="card">
+  <h2>Lịch sử lệnh</h2>
+  <table>
+    <thead>
+      <tr><th>Asset</th><th>Hướng</th><th>Tiền</th><th>Kết quả</th><th>Profit</th></tr>
+    </thead>
+    <tbody>
+      <% orders.forEach(o => { %>
+        <tr>
+          <td><%= o.asset.symbol %></td>
+          <td><%= o.direction %></td>
+          <td><%= o.stake %></td>
+          <td><%= o.status %></td>
+          <td><%= o.profit %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<%- include('../partials/footer') %>
