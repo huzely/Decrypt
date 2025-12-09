@@ -1,28 +1,57 @@
-# Decrypt
-### [+] Created By HTR-TECH (@***tahmid.rayat***)
-### [+] Disclaimer :
-***Decrypter is a tool to decrypt Encrypted Bash Scripts into a Readable Format.This Tool is created for Educational Purpose only.I am not responsible for any misuse of this tool.***
+# Cổng thông tin + Bot Telegram
 
-<img src="https://raw.githubusercontent.com/htr-tech/release-download/master/images/decrypter.png" alt="" border="0" />
+Triển khai portal PHP/MySQL hiển thị bài viết (ảnh, video Telegram) và bot Telegram quản trị.
 
-### [+] Installation
-```apt update```
-
-```apt install git python2 -y```
-
-```git clone https://github.com/hax0rtahm1d/decrypt```
-
-```cd decrypt```
-
-```python2 dec.py```
-
-### Or, Use Single Command
-
+## Cấu trúc thư mục
 ```
-apt update && apt install git python2 -y && git clone https://github.com/hax0rtahm1d/decrypt && cd decrypt && python2 dec.py
+assets/
+  css/style.css
+  js/main.js
+includes/
+  header.php
+  footer.php
+admin/
+  login.php
+  logout.php
+  dashboard.php
+  posts.php
+  post_add.php
+  post_edit.php
+  post_delete.php
+  stats.php
+  includes/{header.php,footer.php,auth_check.php}
+uploads/
+config.php
+functions.php
+index.php
+post.php
+shopee_redirect.php
+telegram_webhook.php
+Dockerfile
+fly.toml
+database.sql
+README.md
 ```
 
-## [+] Find Me on :
-[![Github](https://img.shields.io/badge/Github-HTR--TECH-green?style=for-the-badge&logo=github)](https://github.com/htr-tech)
-[![Instagram](https://img.shields.io/badge/IG-%40tahmid.rayat-red?style=for-the-badge&logo=instagram)](https://www.instagram.com/tahmid.rayat)
-[![Messenger](https://img.shields.io/badge/Chat-Messenger-blue?style=for-the-badge&logo=messenger)](https://m.me/tahmid.rayat.official)
+## Cài đặt trên hosting shared
+1. Tạo database MySQL, cập nhật thông tin trong `config.php` hoặc biến môi trường (`DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`, `BASE_URL`, `TELEGRAM_BOT_TOKEN`).
+2. Import `database.sql` để tạo bảng và seed tài khoản admin (user: `admin`, pass: `password`).
+3. Upload toàn bộ mã nguồn lên hosting, đảm bảo thư mục `uploads` cho phép ghi.
+4. Trỏ webhook bot Telegram tới `https://yourdomain.com/telegram_webhook.php` bằng `https://api.telegram.org/botTOKEN/setWebhook?url=...`.
+5. Đăng nhập admin tại `/admin/login.php` để quản lý bài viết.
+
+## Triển khai bot Telegram trên Fly.io
+- Sửa `Dockerfile` và `fly.toml` với domain/webhook phù hợp.
+- Build & deploy:
+```
+flyctl launch --no-deploy
+flyctl secrets set DB_HOST=... DB_NAME=... DB_USER=... DB_PASS=... TELEGRAM_BOT_TOKEN=...
+flyctl deploy
+```
+
+## Yêu cầu popup Shopee
+- `post.php` hiển thị nút "Xem video" khi không có `play=1`.
+- Khi nhấn, `main.js` mở tab mới `post.php?id=ID&play=1` (autoplay video Telegram) và chuyển tab hiện tại tới `shopee_redirect.php?post_id=ID` để tăng thống kê + redirect Shopee.
+
+## Seed data
+- `database.sql` bao gồm 1 bài viết mẫu tiếng Việt, 1 admin và 1 admin Telegram.
