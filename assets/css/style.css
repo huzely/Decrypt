@@ -1,0 +1,28 @@
+* { box-sizing: border-box; }
+body { font-family: Arial, sans-serif; margin: 0; background: #f6f8fa; color: #333; }
+.container { width: 90%; max-width: 1100px; margin: 0 auto; }
+.site-header, .site-footer { background: #0f172a; color: #fff; padding: 16px 0; }
+.site-header a { color: #fff; text-decoration: none; }
+.posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; margin: 20px 0; }
+.post-card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+.post-card img { width: 100%; height: 160px; object-fit: cover; display: block; }
+.post-card h3 { margin: 0 0 8px 0; font-size: 18px; }
+.post-card p { margin: 0; color: #555; }
+.post-card .post-content { padding: 12px; }
+.badge { background: #ef4444; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 12px; margin-left: 4px; }
+.post-detail { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin: 20px 0; }
+.post-detail h1 { margin-top: 0; }
+.post-thumb { max-width: 100%; height: auto; margin-bottom: 12px; }
+.post-body { line-height: 1.6; }
+.video-btn { background: #2563eb; color: #fff; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; margin-top: 12px; }
+.alert { background: #ecfeff; color: #0f172a; padding: 10px 12px; border: 1px solid #67e8f9; border-radius: 4px; margin-bottom: 10px; }
+.admin-table { width: 100%; border-collapse: collapse; }
+.admin-table th, .admin-table td { padding: 8px; border: 1px solid #e2e8f0; text-align: left; }
+.admin-table th { background: #f8fafc; }
+form label { display: block; margin-top: 12px; font-weight: bold; }
+form input[type="text"], form textarea, form select { width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1; }
+form button { margin-top: 12px; padding: 10px 16px; background: #0ea5e9; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+.pagination { margin-top: 16px; }
+.pagination a { padding: 6px 10px; background: #e2e8f0; color: #111827; margin-right: 4px; border-radius: 4px; text-decoration: none; }
+.admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+@media (max-width: 640px) { .posts-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); } }
