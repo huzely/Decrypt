@@ -1,0 +1,19 @@
+app = "telegram-portal-bot"
+primary_region = "sin"
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  DB_HOST = "mysql-host"
+  DB_NAME = "decrypt_db"
+  DB_USER = "db_user"
+  DB_PASS = "db_pass"
+  TELEGRAM_BOT_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]

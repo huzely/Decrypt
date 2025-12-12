@@ -1,0 +1,13 @@
+app = "telegram-bot-sample"
+primary_region = "sin"
+kill_signal = "SIGINT"
+kill_timeout = 5
+[build]
+  dockerfile = "Dockerfile"
+[env]
+  PORT = "8080"
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_start_machines = true
+  auto_stop_machines = true
