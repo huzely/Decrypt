@@ -1,0 +1,14 @@
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /
+
+RewriteRule ^a/([0-9]+)-([A-Za-z0-9-]+)/?$ /index.php [L,QSA]
+RewriteRule ^$ index.php [L]
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 30 days"
+  ExpiresByType application/javascript "access plus 30 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+</IfModule>
