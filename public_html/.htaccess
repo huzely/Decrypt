@@ -1,0 +1,16 @@
+RewriteEngine On
+
+# Allow system folders
+RewriteRule ^admin/ - [L]
+RewriteRule ^api/ - [L]
+RewriteRule ^bots/ - [L]
+RewriteRule ^assets/ - [L]
+RewriteRule ^includes/ - [L]
+RewriteRule ^app/ - [L]
+
+# Slug route
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)$ post.php?slug=$1 [L,QSA]
+
+RewriteRule ^$ index.php [L]
