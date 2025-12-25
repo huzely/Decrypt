@@ -1,0 +1,4 @@
+body.theme-b { --color-accent:#2563eb; --font-main:'Poppins',system-ui; background:#f0f4ff; }
+.card { border:1px solid #dbeafe; }
+.site-header { background:#1e293b; color:#fff; }
+.site-header a, .branding { color:#fff; }
