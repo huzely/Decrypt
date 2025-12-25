@@ -1,0 +1,7 @@
+body.theme-c { --color-accent:#16a34a; --font-main:'Space Grotesk',system-ui; background:#0f172a; color:#e2e8f0; }
+.card { background:#111827; color:#e2e8f0; border:1px solid #1f2937; }
+.site-header { background:#0b1224; color:#e2e8f0; }
+.site-footer { color:#cbd5e1; }
+.filter-form button { background:var(--color-accent); }
+.pagination a { background:#111827; color:#e2e8f0; border-color:#1f2937; }
+.pagination a.active { background:var(--color-accent); color:#fff; }

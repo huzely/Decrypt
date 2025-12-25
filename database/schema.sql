@@ -1,0 +1,61 @@
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  email VARCHAR(120) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS categories (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  slug VARCHAR(160) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS articles (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  slug VARCHAR(255) NOT NULL UNIQUE,
+  meta_title VARCHAR(255) DEFAULT NULL,
+  meta_description TEXT,
+  keywords VARCHAR(255) DEFAULT NULL,
+  og_image VARCHAR(255) DEFAULT NULL,
+  content MEDIUMTEXT,
+  category_id INT DEFAULT NULL,
+  tags VARCHAR(255) DEFAULT NULL,
+  status ENUM('draft','published') DEFAULT 'draft',
+  include_id_tail TINYINT(1) DEFAULT 0,
+  published_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS settings (
+  `key` VARCHAR(120) PRIMARY KEY,
+  `value` TEXT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS stats_daily (
+  `date` DATE PRIMARY KEY,
+  views INT DEFAULT 0,
+  clicks INT DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS article_stats (
+  article_id INT PRIMARY KEY,
+  views INT DEFAULT 0,
+  clicks INT DEFAULT 0,
+  CONSTRAINT fk_article_stats FOREIGN KEY (article_id) REFERENCES articles(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS interactions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  fingerprint CHAR(64) NOT NULL,
+  type ENUM('view','click') NOT NULL,
+  article_id INT NOT NULL,
+  occurred_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  INDEX(fingerprint),
+  CONSTRAINT fk_interaction_article FOREIGN KEY (article_id) REFERENCES articles(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO categories (name, slug) VALUES ('Tin nóng', 'tin-nong'), ('Thể thao', 'the-thao'), ('Công nghệ', 'cong-nghe');
