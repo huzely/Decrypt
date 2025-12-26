@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteBase /
+# Bỏ qua các thư mục hệ thống
+RewriteCond %{REQUEST_URI} !^/(admin|api|bots|assets|includes|lib|cache|sql)/
+RewriteCond %{REQUEST_URI} !^/config\.php$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/?$ post.php?slug=$1 [QSA,L]

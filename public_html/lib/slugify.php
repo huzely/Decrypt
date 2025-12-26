@@ -1,0 +1,11 @@
+<?php
+require_once __DIR__ . '/../config.php';
+
+function slugify(string $text): string {
+    $text = iconv('UTF-8', 'ASCII//TRANSLIT', $text);
+    $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+    $text = trim($text, '-');
+    $text = strtolower($text);
+    $text = preg_replace('~[^-a-z0-9]+~', '', $text);
+    return $text ?: 'bai-viet';
+}
