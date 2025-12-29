@@ -1,0 +1,16 @@
+body { font-family: 'Inter', 'Segoe UI', sans-serif; margin:0; background:#0b1021; color:#e2e8f0; }
+.admin-shell { display:flex; min-height:100vh; }
+.sidebar { width:240px; background:#0f172a; padding:20px; position:sticky; top:0; height:100vh; }
+.sidebar h2 { margin:0 0 12px; font-size:18px; }
+.sidebar a { display:block; color:#e2e8f0; padding:10px 12px; border-radius:10px; text-decoration:none; margin-bottom:6px; transition:.2s; }
+.sidebar a:hover, .sidebar a.active { background:#11182f; }
+.main { flex:1; padding:24px; }
+.card { background:#11182f; border-radius:12px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,0.3); }
+.table { width:100%; border-collapse:collapse; }
+.table th, .table td { padding:10px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.05); }
+.btn { background:#38bdf8; color:#0b1021; padding:10px 14px; border-radius:10px; border:none; cursor:pointer; font-weight:700; text-decoration:none; display:inline-block; }
+input, textarea, select { width:100%; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.1); background:#0b1021; color:#e2e8f0; }
+form { display:grid; gap:12px; }
+.alert { padding:12px; border-radius:10px; background:rgba(56,189,248,0.1); color:#67e8f9; }
+.actions { display:flex; gap:8px; flex-wrap:wrap; }
+.topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
