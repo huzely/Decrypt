@@ -1,20 +1,13 @@
 # Website tin tức đơn giản
 
-Upload toàn bộ thư mục `public_html` lên hosting, import file `sql/database.sql` vào MySQL, chỉnh thông tin DB trong `config.php`.
+Upload toàn bộ thư mục `public_html` lên hosting (DataOnline.vn), import `sql/database.sql`, cập nhật thông tin DB trong `config.php`. Sau khi import có sẵn tài khoản admin/admin567.
 
-## Cấu trúc
-- `index.php`: Trang chủ với nút liên hệ admin.
-- `post.php`: Hiển thị bài viết theo slug và overlay quảng cáo.
-- `admin/`: Đăng nhập và trang quản trị một trang.
-- `api/track.php`: Ghi nhận lượt xem và click quảng cáo.
-- `assets/`: CSS/JS.
-- `lib/`: Thư viện chung (DB, auth, csrf, slugify, error handler, track).
-- `sql/database.sql`: Tạo bảng và tài khoản admin mặc định (admin/admin567).
-- `.htaccess`: Rewrite slug -> post.php.
+## Đường dẫn
+- Trang chủ: `/`
+- Trang bài: `/slug`
+- Đăng nhập: `/admin/login.php`
+- Trang quản trị một trang: `/admin/panel.php`
 
-## Đăng nhập admin
-- URL: /admin/login.php
-- Tài khoản mặc định: admin / admin567
-
-## Ghi chú
-- APP_DEBUG trong `config.php` khi false sẽ ghi log vào `logs/app.log`.
+## Lưu ý
+- Bật/tắt quảng cáo, link Shopee, link liên hệ nằm trong tab Cài đặt của panel.
+- Khi quảng cáo bật và người dùng mở trực tiếp `/slug`, overlay sẽ xuất hiện ngay; đóng overlay sẽ mở tab mới `/slug?ad=0` và tab hiện tại chuyển sang link Shopee.

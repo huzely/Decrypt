@@ -1,10 +1,10 @@
 <?php
 function slugify(string $text): string
 {
-    $text = preg_replace('~[\p{Pd}\s]+~u', '-', $text);
+    $text = trim($text);
     $text = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $text);
-    $text = preg_replace('~[^\w-]+~', '', $text);
+    $text = preg_replace('~[^\pL\d]+~u', '-', $text);
     $text = trim($text, '-');
     $text = strtolower($text);
-    return $text ?: uniqid('post-', true);
+    return $text ?: 'bai-' . bin2hex(random_bytes(4));
 }

@@ -1,8 +1,9 @@
 <?php
 require_once __DIR__ . '/../config.php';
 
-if (!is_dir(__DIR__ . '/../logs')) {
-    mkdir(__DIR__ . '/../logs', 0775, true);
+$logDir = __DIR__ . '/../logs';
+if (!is_dir($logDir)) {
+    mkdir($logDir, 0775, true);
 }
 
 function render_error_page(): void
@@ -29,27 +30,24 @@ set_error_handler(function ($severity, $message, $file, $line) {
     return true;
 });
 
-set_exception_handler(function ($exception) {
-    $error = sprintf('[%s] Uncaught exception %s: %s in %s on line %d%s',
-        date('c'), get_class($exception), $exception->getMessage(), $exception->getFile(), $exception->getLine(), PHP_EOL);
-
+set_exception_handler(function ($ex) {
+    $error = sprintf('[%s] Uncaught %s: %s in %s on line %d%s', date('c'), get_class($ex), $ex->getMessage(), $ex->getFile(), $ex->getLine(), PHP_EOL);
     if (APP_DEBUG) {
         echo '<pre>' . htmlspecialchars($error, ENT_QUOTES, 'UTF-8') . '</pre>';
         return;
     }
-
     file_put_contents(__DIR__ . '/../logs/app.log', $error, FILE_APPEND);
     render_error_page();
 });
 
 register_shutdown_function(function () {
-    $error = error_get_last();
-    if ($error && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR], true)) {
-        $message = sprintf('[%s] Fatal error: %s in %s on line %d%s', date('c'), $error['message'], $error['file'], $error['line'], PHP_EOL);
+    $last = error_get_last();
+    if ($last && in_array($last['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR], true)) {
+        $error = sprintf('[%s] Fatal: %s in %s on line %d%s', date('c'), $last['message'], $last['file'], $last['line'], PHP_EOL);
         if (APP_DEBUG) {
-            echo '<pre>' . htmlspecialchars($message, ENT_QUOTES, 'UTF-8') . '</pre>';
+            echo '<pre>' . htmlspecialchars($error, ENT_QUOTES, 'UTF-8') . '</pre>';
         } else {
-            file_put_contents(__DIR__ . '/../logs/app.log', $message, FILE_APPEND);
+            file_put_contents(__DIR__ . '/../logs/app.log', $error, FILE_APPEND);
         }
     }
 });

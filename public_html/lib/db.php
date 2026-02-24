@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/error_handler.php';
 
-function get_pdo(): PDO
+function db(): PDO
 {
     static $pdo;
     if ($pdo instanceof PDO) {
@@ -22,14 +22,14 @@ function get_pdo(): PDO
         if (APP_DEBUG) {
             throw $e;
         }
-        file_put_contents(__DIR__ . '/../logs/app.log', '[' . date('c') . '] DB connection failed: ' . $e->getMessage() . PHP_EOL, FILE_APPEND);
+        file_put_contents(__DIR__ . '/../logs/app.log', '[' . date('c') . "] DB connect error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
         render_error_page();
     }
 
     return $pdo;
 }
 
-function fetch_settings(PDO $pdo): array
+function load_settings(PDO $pdo): array
 {
     $stmt = $pdo->query('SELECT * FROM settings WHERE id = 1 LIMIT 1');
     $settings = $stmt->fetch();

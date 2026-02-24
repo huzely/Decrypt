@@ -1,66 +1,63 @@
 :root {
+    --bg: #f8fafc;
+    --text: #0f172a;
     --primary: #2563eb;
-    --bg: #f7f8fa;
-    --text: #111827;
-    --muted: #4b5563;
 }
 * { box-sizing: border-box; }
 body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     background: var(--bg);
     color: var(--text);
 }
 .container {
-    max-width: 760px;
+    max-width: 780px;
     margin: 0 auto;
-    padding: 20px 16px 48px;
+    padding: 20px 16px 60px;
 }
 h1, h2, h3 { margin-top: 0; }
+.home { text-align: center; padding-top: 80px; }
 .primary-btn {
     display: inline-block;
     padding: 14px 20px;
     background: var(--primary);
     color: #fff;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: 600;
-    text-align: center;
 }
-.primary-btn:hover { opacity: 0.9; }
-.home { text-align: center; padding-top: 80px; }
-.error-page { text-align: center; }
-.post h1 { margin-bottom: 12px; }
-.content { white-space: pre-wrap; line-height: 1.6; margin-bottom: 16px; }
+.primary-btn:hover { opacity: 0.92; }
+.content { line-height: 1.6; white-space: pre-wrap; margin-bottom: 14px; }
 .media-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); gap: 12px; }
-.media-item img, .media-item video, .media-item iframe { width: 100%; border-radius: 8px; }
+.media-item img, .media-item video, .media-item iframe { width: 100%; border-radius: 10px; }
+.error-page { text-align: center; }
 
-/* Overlay */
 #ad-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.72);
-    color: #fff;
+    background: rgba(0,0,0,0.7);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
+    color: #fff;
 }
-#ad-overlay .inner {
-    max-width: 480px;
-    background: #111827;
+#ad-overlay .box {
+    background: #0f172a;
     padding: 24px;
     border-radius: 12px;
+    width: 90%;
+    max-width: 480px;
     position: relative;
     text-align: center;
-    box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+    box-shadow: 0 18px 38px rgba(0,0,0,0.35);
 }
-#ad-overlay button.close {
+#ad-overlay .close {
     position: absolute;
     top: 12px;
     right: 12px;
-    background: transparent;
     border: none;
+    background: transparent;
     color: #fff;
     font-size: 20px;
     cursor: pointer;

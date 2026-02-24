@@ -33,9 +33,10 @@ CREATE TABLE IF NOT EXISTS stats (
   INDEX idx_post (post_id)
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-INSERT INTO admins (username, password_hash) VALUES ('admin', '$2y$12$V.97JyiCRI3EUNfz4uojbupFsTqpoZObHXGGy/tFFiV.kFCGAEj7G')
+INSERT INTO admins (username, password_hash) VALUES
+('admin', '$2y$12$V.97JyiCRI3EUNfz4uojbupFsTqpoZObHXGGy/tFFiV.kFCGAEj7G')
 ON DUPLICATE KEY UPDATE password_hash = VALUES(password_hash);
 
-INSERT INTO settings (id, ads_enabled, ad_link, ad_title, ad_body, contact_link)
-VALUES (1, 0, '', '', '', '')
+INSERT INTO settings (id, ads_enabled, ad_link, ad_title, ad_body, contact_link) VALUES
+(1, 0, '', '', '', '')
 ON DUPLICATE KEY UPDATE ads_enabled = VALUES(ads_enabled);
