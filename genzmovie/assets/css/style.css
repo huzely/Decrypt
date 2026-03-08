@@ -1,0 +1,9 @@
+body { font-family: 'Segoe UI', sans-serif; }
+.movie-card img { height: 260px; object-fit: cover; }
+.movie-card:hover { transform: translateY(-4px); transition: .2s; box-shadow: 0 0 12px rgba(255,255,255,.12); }
+.featured-img { max-height: 420px; object-fit: cover; filter: brightness(.6); }
+.bg-overlay { background: rgba(0,0,0,.55); }
+.autocomplete-box { position:absolute; top:100%; left:0; right:0; background:#111; z-index:1000; border:1px solid #444; }
+.autocomplete-box a { display:block; color:#fff; padding:6px 10px; text-decoration:none; }
+.autocomplete-box a:hover { background:#222; }
+.ad-slot iframe, .ad-slot img { max-width: 100%; }
