@@ -1,28 +1,69 @@
-# Decrypt
-### [+] Created By HTR-TECH (@***tahmid.rayat***)
-### [+] Disclaimer :
-***Decrypter is a tool to decrypt Encrypted Bash Scripts into a Readable Format.This Tool is created for Educational Purpose only.I am not responsible for any misuse of this tool.***
+# GENZMOVIE
 
-<img src="https://raw.githubusercontent.com/htr-tech/release-download/master/images/decrypter.png" alt="" border="0" />
+GENZMOVIE is a PHP + MySQL movie streaming website with OPhim auto crawler, admin dashboard, ad monetization, user accounts, watchlist/history, SEO routes, and responsive UI.
 
-### [+] Installation
-```apt update```
+## Project Structure
 
-```apt install git python2 -y```
-
-```git clone https://github.com/hax0rtahm1d/decrypt```
-
-```cd decrypt```
-
-```python2 dec.py```
-
-### Or, Use Single Command
-
+```text
+genzmovie/
+├── config/
+├── controllers/
+├── models/
+├── views/
+├── assets/
+├── uploads/
+├── admin/
+├── crawler/
+├── api/
+├── includes/
+├── database/
+├── index.php
+└── .htaccess
 ```
-apt update && apt install git python2 -y && git clone https://github.com/hax0rtahm1d/decrypt && cd decrypt && python2 dec.py
-```
 
-## [+] Find Me on :
-[![Github](https://img.shields.io/badge/Github-HTR--TECH-green?style=for-the-badge&logo=github)](https://github.com/htr-tech)
-[![Instagram](https://img.shields.io/badge/IG-%40tahmid.rayat-red?style=for-the-badge&logo=instagram)](https://www.instagram.com/tahmid.rayat)
-[![Messenger](https://img.shields.io/badge/Chat-Messenger-blue?style=for-the-badge&logo=messenger)](https://m.me/tahmid.rayat.official)
+## Features
+
+- Netflix-style homepage with featured slider and category blocks.
+- Search + autocomplete + filter by genre/year/country/quality.
+- Movie details with metadata, episodes, and related movies.
+- Player supports iframe embed and direct MP4/HLS source.
+- Multiple server episode links.
+- User register/login/logout with dashboard (favorites + watch history).
+- Ad monetization: header/sidebar/popup/footer/video pre-roll placements.
+- Admin dashboard for crawler trigger, ad management, overview of movies/users/comments.
+- OPhim crawler imports movie metadata + episodes + links.
+- SEO: friendly route `/phim/{slug}` and XML sitemap endpoint.
+- Security basics: password hashing, prepared statements, CSRF token, output escaping.
+
+## Installation Guide
+
+1. **Copy files** into web root (Apache/Nginx + PHP 8+).
+2. **Create database**:
+   ```bash
+   mysql -u root -p < genzmovie/database/schema.sql
+   ```
+3. **Update DB credentials** in `genzmovie/config/config.php`.
+4. **Set document root** to project root or `/genzmovie` and enable mod_rewrite.
+5. **Open website**:
+   - Frontend: `http://localhost/genzmovie/`
+   - Admin: `http://localhost/genzmovie/admin/login.php`
+6. **Default admin account**:
+   - Email: `admin@genzmovie.local`
+   - Password: `admin123`
+
+## Crawler
+
+- Manual import: use **Import từ OPhim** button in `/admin`.
+- Cronjob:
+  ```bash
+  */30 * * * * php /path/to/genzmovie/crawler/ophim_crawler.php
+  ```
+
+## Sitemap
+
+- XML sitemap endpoint: `http://localhost/genzmovie/api/sitemap.php`
+
+## Notes
+
+- Add your Google AdSense / ad network code at admin ads form.
+- For production, configure HTTPS, strict CSP, and hardened session settings.
